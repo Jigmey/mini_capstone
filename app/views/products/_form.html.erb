@@ -1,0 +1,20 @@
+<%@game.errors.full_messages.each do |error|%>
+	<p><%=error%></p>
+<%end%>
+
+<%= form_tag url, method: form_method do %>
+
+<div>
+  <%= label_tag(:name) %>
+  <%= text_field_tag(:name, @game.name) %>
+</div>
+<div>
+  <%= label_tag(:price) %>
+  <%= text_field_tag(:price, @game.price) %>
+</div>
+<div>    
+  <%= label_tag(:description) %>
+  <%= text_field_tag(:description, @game.description) %>
+</div>
+<%= submit_tag "Submit" %>
+<% end %>

@@ -1,0 +1,6 @@
+<h2>This is the edited version!</h2>
+
+<%= render'form.html.erb', 
+message:"Edit Product",
+url: "/photo/#{@game.id}",
+form_method: :patch %>

@@ -1,0 +1,50 @@
+
+<body>
+<h2><%= @game.name %></h2>
+<div class="row">
+ 
+  <%if @game.name =="Black Desert"%>
+	<div class="col-md-6">
+	  <img src="http://cdn.escapistmagazine.com/media/global/images/library/deriv/1299/1299395.jpg" alt="Game" style="width: 550px;height: 350px;">
+	</div>
+  <%elsif @game.name =="Tera"%>
+    <div class="col-md-6"><%= @game.image %>
+	  <img src="http://img.wallpaperfolder.com/f/65D5B30BFE15/tera-online-209580.jpg" alt="Game" style="width: 550px;height: 350px;">
+	</div>
+  <%elsif @game.name =="Overwatch"%>
+    <div class="col-md-6">
+      <img src="http://on-winning.com/wp-content/uploads/2016/09/overwatch-group.jpg" alt="Game" style="width: 550px;height: 350px;">
+    </div>
+  <%end%>
+
+  <div class="col-md-6">
+    <div>
+      <%if @game.name =="Black Desert"%>
+        <iframe width="500" height="315" src="https://www.youtube.com/embed/-Wjx8gBSTSI" frameborder="0" allowfullscreen>
+        </iframe>
+      <%elsif @game.name =="Tera"%>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/dJbjaBXZHzY" frameborder="0" allowfullscreen>
+        </iframe>
+      <%elsif @game.name =="Overwatch"%>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/hk6GtmoqOmg" frameborder="0" allowfullscreen>
+        </iframe>
+      <%end%>
+    </div>
+    <p><%= @game.price %></p>
+    <p><%= @game.description %></p>
+  </div>
+</div>
+
+<%= form_tag("/carted_products", method: :post) do %>
+<div>  
+  <%= label_tag(:quantity) %>
+  <%= text_field_tag(:quantity) %>
+  <%=hidden_field_tag :game_id, @game.id %>
+</div>
+<%= submit_tag "Add to Cart" %>
+<% end %>
+</body>
+
+
+
+<%= link_to'Back',:back %>

@@ -3,12 +3,81 @@
   <head>
     <title>MiniCapstone</title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track'=>true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track'=> true %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
   </head>
 
   <body>
+  <% flash.each do |name, message| %>
+   <div class="alert alert-<%= name %> alert-dismissible" role="alert">
+     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+     <%= message.html_safe %>
+   </div>
+ <% end %>
+  <div class="Navbar">
+	  <nav class="navbar navbar-light bg-faded">
+		  <ul class="nav navbar-nav">
+		    <li class="nav-item active">
+		      <a class="nav-link" href="/photo/">Home <span class="sr-only">(current)</span></a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="#">Features</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="#">Pricing</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="#">About  </a>
+		    </li>
+		    <li class="nav-item">
+		    <%Category.all.each do |category|%>
+		    <a class="nav-link" href="/photo?category_id=<%category.name%>"Tags</a>
+		    <%end%>
+		    </li>
+		    <!--ORDER DROPDOWN -->
+			<div class="btn-group">
+			 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    Order <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu">
+			    <li><a href="/photo/random">Random</a></li>
+			    <li><a href="/photo?high_to_low_Orders">High Order</a></li>
+			    <li><a href="/photo?low_to_high_Orders">Low Order</a></li>
+			    <li><a href="/photo?sort_low_to_high">Sort</a></li>
+			    <li role="separator" class="divider"></li>
+			   </ul>
+			</div>
+			<% if current_user %>
+				<div class="btn-group">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    <%=current_user.name%> <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+					    <li><a href="/photo/random">Random</a></li>
+					    <li><a href="/photo">Profile</a></li>
+					    <li><a href="/photo">Settings</a></li>
+		 			    <li><a href="/logout">Logout</a></li>
+					    <li role="separator" class="divider"></li>
+					</ul>
+				</div>
+			<% else %>
+				<li class="nav-item">
+			      <a class="nav-link" href="/login">Login</a>
+			    </li>
+			    <li class="nav-item">
+			      <a class="nav-link" href="/signup">SignUp</a>
+			    </li>
+		    <%end%>
+			<div class="btn-group">
+				<%= form_tag"/photo", method: :get, class: "navbar-form navbar-left" do %>
+					<%=text_field_tag :search_content,'', class: "form_control", placeholder:"Games?"%>
+					<%=submit_tag 'Enter'%>
+				<% end %>
+			</li>
+		  </ul>
+		</nav>
+  </div>
     <%= yield %>
   </body>
 </html>

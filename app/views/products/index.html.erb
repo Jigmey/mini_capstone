@@ -1,0 +1,16 @@
+<!DOCTYPE>
+<head>
+<h2 style= "text-align: center;">Here are some games.</h2>
+</head>
+<body>	
+<div class="row">
+  <div class="col-xs-6 col-md-4">
+  <% @games.each do |mmorpg| %>
+	  <a href="/photo/<%= mmorpg.id %>"><h3><%= mmorpg.name%></h3></a>
+  <% end %>
+  </div>
+  </div>
+</div>
+</body>
+
+

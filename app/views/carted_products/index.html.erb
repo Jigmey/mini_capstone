@@ -1,0 +1,11 @@
+<h2>Your Cart!</h2>
+
+<%@cartedproducts.each do |cartedproduct|%>
+	<p><%=cartedproduct.game_id%></p>
+	<p><%=cartedproduct.game.name%></p>
+	<%=cartedproduct.status%>
+<%end%>
+
+<%= form_tag("/orders", method: :post) do %>
+	<%= submit_tag "Buy Now" %>
+<%end%>

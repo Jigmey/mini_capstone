@@ -1,0 +1,7 @@
+<h2>Here is the order from lowest to highest.</h2>
+
+<%@low_to_high_Order.each do |order|%>
+	<h3><%=order.name%></h3>
+	<p><%=order.price%></p>
+<%end%>
+<%= link_to'Back',:back %>
